@@ -25,4 +25,4 @@ awk 'BEGIN{{ORS=""} {K=0}{S=0}{P=$1} {Q=$8} }
 	}
 	{print" "$2}
 	{P=$1}
-    }'
+    }END{print " )"}'
