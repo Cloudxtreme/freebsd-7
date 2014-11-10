@@ -22,7 +22,7 @@ do      case "$opt" in
 		ifsrc=1
 		ifLang=1
 		ifcommand=1
-	#	echo "Usage: ./hw3-2.sh [-h] [-s src] [-o output_file] [-l lang] [-c complier]"
+		echo "Usage: ./hw3-2.sh [-h] [-s src] [-o output_file] [-l lang] [-c complier]"
 		exit
 		;;
 	s) 
@@ -71,64 +71,37 @@ fi
 for word in $language;do
 		lang=$word
 		if [ $lang = "c" -o $lang = "C" ];then
-			`cp $source doit.c`
-			`$defaultgcc -o $outfile doit.c`
+			`$defaultgcc -o $outfile $source`
 			do=`./$outfile`
 			echo $do
-			`rm doit.c`
 		elif [ $lang = "cc" -o $lang = "cpp" -o $lang = "Cpp" -o $lang = "c++" -o $lang = "C++" ];then
-			`cp $source doit.c`
 			`$defaultgpp -o $outfile $source`
 			do=`./$outfile`
 			echo $do
-			`rm doit.c`
 		elif [ $lang = "awk" -o $lang = "AWK" ];then
-			`cp $source ./doit.awk`
-			`chmod u+x ./doit.awk`
-			do=`./doit.awk`
+			do=`./$source`
 			echo $do
-			`rm ./doit.awk`
 		elif [ $lang = "perl" -o $lang = "Perl" ];then
-			`cp $source ./doit.pl`
-			`chmod u+x ./doit.pl`
-			do=`perl ./doit.pl`
+			do=`perl ./$source`
 			echo $do
-			`rm ./doit.pl`
 		elif [ $lang = "python" -o $lang = "Python" -o $lang = "py" -o $lang = "python2" -o $lang = "Python2" -o $lang = "py2" ];then
-			`cp $source ./doit.pl`
-			`chmod u+x ./doit.pl`
-			do=`python ./doit.pl`
+			do=`python ./$source`
 			echo $do
-			`rm ./doit.pl`
 		elif [ $lang = "python3" -o $lang = "Python3" -o $lang = "py3" ];then
-			`cp $source ./doit.pl`
-			`chmod u+x ./doit.pl`
-			do=`python3 ./doit.pl`
+			do=`python3 ./$source`
 			echo $do
-			`rm ./doit.pl`
 		elif [ $lang = "ruby" -o $lang = "Ruby" -o $lang = "rb" ];then
-			`cp $source ./doit.pl`
-			`chmod u+x ./doit.pl`
-			do=`ruby ./doit.pl`
+			do=`ruby ./$source`
 			echo $do
-			`rm ./doit.pl`
 		elif [ $lang = "Haskell" -o $lang = "haskell" -o $lang = "hs" ];then
-			`cp $source ./doit.hs`
-			do=`runhaskell ./doit.hs`
+			do=`runhaskell ./source`
 			echo $do
-			`rm ./doit.hs`
 			
 		elif [ $lang = "lua" -o $lang = "Lua" ];then
-		`cp $source ./doit.sh`
-			`chmod u+x ./doit.sh`
-			do=`gcc $source --llua -llualib -o $outfile`
-		`rm ./doit.sh`
+			do=`lua $source`
 		elif [ $lang = "bash" -o $lang = "Bash" ];then
-			`cp $source ./doit.sh`
-			`chmod u+x ./doit.sh`
-			do=`/usr/local/bin/bash ./doit.sh`
+			do=`/usr/local/bin/bash ./$source`
 			echo $do
-			`rm ./doit.sh`
 		else
 			echo "The wrong language"
 			exit	
